@@ -11,7 +11,8 @@ cd /var/lib/shim-signed/mok/
 sudo openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -days 36500 -subj "/CN=Randomtech/" -nodes
 sudo mokutil --import /var/lib/shim-signed/mok/MOK.der
 
-Reboot
+# Reboot
+# Import the key.
 
 # Check if the key is imported properly.
 sudo mokutil --test-key /var/lib/shim-signed/mok/MOK.der
@@ -20,3 +21,5 @@ sudo dmesg | grep cert
 # Download and install VirtualBox from the official site.
 # I like to use gdebi for deb files installation.
 sudo apt install gdebi -y
+
+# Run VirtualBox
