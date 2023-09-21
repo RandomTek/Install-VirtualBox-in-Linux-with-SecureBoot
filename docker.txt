@@ -1,2 +1,0 @@
-Exit docker eval
-  eval "(docker-machine env -u)"
