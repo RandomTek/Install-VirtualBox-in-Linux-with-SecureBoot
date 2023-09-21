@@ -1,0 +1,14 @@
+sudo mokutil --sb-state
+
+sudo apt install dkms -y
+sudo mkdir -p /var/lib/shim-signed/mok/
+cd /var/lib/shim-signed/mok/
+sudo openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -days 36500 -subj "/CN=Randomtech/" -nodes
+sudo mokutil --import /var/lib/shim-signed/mok/MOK.der
+
+Reboot
+
+sudo mokutil --test-key /var/lib/shim-signed/mok/MOK.der
+sudo dmesg | grep cert
+
+sudo apt install gdebi -y
