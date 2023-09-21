@@ -1,14 +1,22 @@
+# Check if SecureBoot is enabled.
 sudo mokutil --sb-state
 
+# Install DKMS for key management.
 sudo apt install dkms -y
+
+# Create a folder for the key then generate it and import it.
 sudo mkdir -p /var/lib/shim-signed/mok/
 cd /var/lib/shim-signed/mok/
+# Be sure to change the CN.
 sudo openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -days 36500 -subj "/CN=Randomtech/" -nodes
 sudo mokutil --import /var/lib/shim-signed/mok/MOK.der
 
 Reboot
 
+# Check if the key is imported properly.
 sudo mokutil --test-key /var/lib/shim-signed/mok/MOK.der
 sudo dmesg | grep cert
 
+# Download and install VirtualBox from the official site.
+# I like to use gdebi for deb files installation.
 sudo apt install gdebi -y
